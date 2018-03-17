@@ -12,3 +12,7 @@ SEC_DEFAULT_NEGOTIATION = {{ default .Env.SEC_DEFAULT_NEGOTIATION "NEVER" }}
 
 # Set this so that anonymous users (including SOAP users) can insert jobs into the queue
 QUEUE_ALL_USERS_TRUSTED = {{ default .Env.QUEUE_ALL_USERS_TRUSTED "True" }}
+
+START = True
+
+SEC_PASSWORD_FILE = {{ default .Env.SEC_PASSWORD_FILE "/etc/condor/password" }}
