@@ -9,7 +9,8 @@ COPY deployment/conf /etc/condor/
 RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize/dist/dockerize-linux-amd64-v0.5.0.tar.gz && \
     cd /usr/bin && \
     tar xvzf /tmp/dockerize.tgz && \
-    rm /tmp/dockerize.tgz
+    rm /tmp/dockerize.tgz && \
+    adduser condor_pool
 
 # The BUILD_DATE value seem to bust the docker cache when the timestamp changes, move to
 # the end
