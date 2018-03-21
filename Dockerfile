@@ -6,6 +6,8 @@ ARG VCS_REF
 ARG BRANCH=develop
 
 COPY deployment/conf /etc/condor/
+COPY deployment/bin/start-condor.sh /usr/sbin/start-condor.sh
+
 RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize/dist/dockerize-linux-amd64-v0.5.0.tar.gz && \
     cd /usr/bin && \
     tar xvzf /tmp/dockerize.tgz && \
