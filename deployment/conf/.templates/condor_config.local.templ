@@ -31,3 +31,4 @@ ALLOW_DAEMON = condor_pool@$(UID_DOMAIN)/*, \
                {{ default .Env.SCHEDD_NAME "kbase" }}@$(UID_DOMAIN)/$(IP_ADDRESS)
 ALLOW_NEGOTIATOR = condor_pool@$(UID_DOMAIN)/*,{{ default .Env.SCHEDD_NAME "kbase" }}@$(UID_DOMAIN)/$(IP_ADDRESS)
 ALLOW_COLLECTOR = condor_pool@$(UID_DOMAIN)/*,{{ default .Env.SCHEDD_NAME "kbase" }}@$(UID_DOMAIN)/$(IP_ADDRESS)
+ALLOW_ADVERTISE_STARTD = condor_pool@$(UID_DOMAIN)/*,{{ default .Env.SCHEDD_NAME "kbase" }}@$(UID_DOMAIN)/$(IP_ADDRESS)
