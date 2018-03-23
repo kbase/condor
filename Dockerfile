@@ -25,4 +25,5 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 ENTRYPOINT [ "/usr/bin/dockerize" ]
 CMD [ "-template", "/etc/condor/.templates/condor_config.local.templ:/etc/condor/condor_config.local", \
+      "-stdout", "/var/log/condor/SchedLog", \
       "/usr/sbin/start-condor.sh" ]
