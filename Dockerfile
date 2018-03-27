@@ -1,4 +1,4 @@
-FROM andypohl/htcondor:latest
+FROM andypohl/htcondor:stable
 
 # These ARGs values are passed in via the docker build command
 ARG BUILD_DATE
