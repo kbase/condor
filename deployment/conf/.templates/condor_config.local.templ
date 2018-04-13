@@ -1,5 +1,5 @@
 
-{{- if .Env.NETWORK_HOSTNAME -}} NETWORK_HOSTNAME = {{ .Env.NETWORK_HOSTNAME }} {{- end -}}
+{{- if .Env.NETWORK_HOSTNAME -}} NETWORK_HOSTNAME = {{ .Env.NETWORK_HOSTNAME }} {{- end }}
 MASTER_NAME = {{ default .Env.MASTER_NAME "kbase" }}
 SCHEDD_NAME = {{ default .Env.SCHEDD_NAME "kbase" }}
 
