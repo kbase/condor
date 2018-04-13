@@ -1,3 +1,4 @@
+NETWORK_HOSTNAME = {{ default .Env.NETWORK_HOSTNAME "$(FULL_HOSTNAME)" }}
 MASTER_NAME = {{ default .Env.MASTER_NAME "kbase" }}
 SCHEDD_NAME = {{ default .Env.SCHEDD_NAME "kbase" }}
 
