@@ -8,6 +8,20 @@ CONDOR_IDS = 0.0
 ALLOW_WRITE = {{ default .Env.ALLOW_WRITE "*" }}
 FLOCK_FROM = {{ default .Env.FLOCK_FROM "*" }}
 
+# If the environment variable USE_TCP is set to true, the template will enable
+# this group of directives that convert communications to TCP
+# per https://lists.cs.wisc.edu/archive/htcondor-users/2011-August/msg00085.shtml
+# UPDATE_COLLECTOR_WITH_TCP = True
+# UPDATE_COLLECTOR_WITH_TCP = True
+# WANT_UDP_COMMAND_SOCKET = False
+# COLLECTOR_MAX_FILE_DESCRIPTORS = 3000
+{{ if .Env.USE_TCP -}}
+UPDATE_COLLECTOR_WITH_TCP = True
+UPDATE_VIEW_COLLECTOR_WITH_TCP = True
+WANT_UDP_COMMAND_SOCKET = False
+COLLECTOR_MAX_FILE_DESCRIPTORS = 3000
+{{- end }}
+
 SEC_DEFAULT_AUTHENTICATION = {{ default .Env.SEC_DEFAULT_AUTHENTICATION "REQUIRED" }}
 SEC_DEFAULT_AUTHENTICATION_METHODS = {{ default .Env.SEC_AUTHENTICATION_METHODS "PASSWORD" }}
 SEC_CLIENT_AUTHENTICATION_METHODS = {{ default .Env.SEC_CLIENT_AUTHENTICATION_METHODS "PASSWORD" }}
