@@ -14,6 +14,12 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
     rm /tmp/dockerize.tgz && \
     adduser condor_pool
 
+RUN cd /root && \
+    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+    python get-pip.py && \
+    pip install htcondor  && \
+    rm /root/get-pip.py
+
 # The BUILD_DATE value seem to bust the docker cache when the timestamp changes, move to
 # the end
 LABEL org.label-schema.build-date=$BUILD_DATE \
