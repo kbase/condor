@@ -2,6 +2,7 @@
 {{- if .Env.NETWORK_HOSTNAME -}} NETWORK_HOSTNAME = {{ .Env.NETWORK_HOSTNAME }} {{- end }}
 MASTER_NAME = {{ default .Env.MASTER_NAME "kbase" }}
 SCHEDD_NAME = {{ default .Env.SCHEDD_NAME "kbase" }}
+SCHEDD_HOST = {{ default .Env.SCHEDD_HOST "kbase@condor" }}
 
 CONDOR_IDS = 0.0
 
@@ -48,3 +49,7 @@ ALLOW_DAEMON = condor_pool@$(UID_DOMAIN)/*, \
 ALLOW_NEGOTIATOR = condor_pool@$(UID_DOMAIN)/*,{{ default .Env.SCHEDD_NAME "kbase" }}@$(UID_DOMAIN)/$(IP_ADDRESS)
 ALLOW_COLLECTOR = condor_pool@$(UID_DOMAIN)/*,{{ default .Env.SCHEDD_NAME "kbase" }}@$(UID_DOMAIN)/$(IP_ADDRESS)
 ALLOW_ADVERTISE_STARTD = condor_pool@$(UID_DOMAIN)/*,{{ default .Env.SCHEDD_NAME "kbase" }}@$(UID_DOMAIN)/$(IP_ADDRESS)
+
+# Options for frequency of negotiation, and minimum time length of the negotiation cycle
+NEGOTIATOR_INTERVAL = {{ default .Env.NEGOTIATOR_INTERVAL "5" }}
+NEGOTIATOR_CYCLE_DELAY = {{ default .Env.NEGOTIATOR_CYCLE_DELAY "5" }}
