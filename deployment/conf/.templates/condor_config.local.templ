@@ -4,14 +4,6 @@ MASTER_NAME = {{ default .Env.MASTER_NAME "kbase" }}
 SCHEDD_NAME = {{ default .Env.SCHEDD_NAME "kbase" }}
 SCHEDD_HOST = {{ default .Env.SCHEDD_HOST "kbase@condor" }}
 
-LOCAL_DIR = {{ default .Env.LOCAL_DIR "/usr/local/condor" }}
-
-RUN     = $(LOCAL_DIR)/run/condor
-LOG     = $(LOCAL_DIR)/log/condor
-LOCK    = $(LOCAL_DIR)/lock/condor
-SPOOL   = $(LOCAL_DIR)/lib/condor/spool
-EXECUTE = $(LOCAL_DIR)/lib/condor/execute
-
 CONDOR_IDS = 0.0
 
 ALLOW_WRITE = {{ default .Env.ALLOW_WRITE "*" }}
