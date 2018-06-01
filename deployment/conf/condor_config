@@ -23,7 +23,8 @@ RELEASE_DIR = /usr
 
 ##  Where is the local condor directory for each host?  This is where the local config file(s), logs and
 ##  spool/execute directories are located. this is the default for Linux and Unix systems.
-LOCAL_DIR = /var
+### KBase: this is set in condor_config.local so that we can templatize it
+#LOCAL_DIR = /var
 
 ##  Where is the machine-specific local config file for each host?
 LOCAL_CONFIG_FILE = /etc/condor/condor_config.local
@@ -56,11 +57,12 @@ use SECURITY : HOST_BASED
 #SEC_PASSWORD_FILE = $(LOCAL_DIR)/lib/condor/pool_password
 
 ##  Pathnames
-RUN     = $(LOCAL_DIR)/run/condor
-LOG     = $(LOCAL_DIR)/log/condor
-LOCK    = $(LOCAL_DIR)/lock/condor
-SPOOL   = $(LOCAL_DIR)/lib/condor/spool
-EXECUTE = $(LOCAL_DIR)/lib/condor/execute
+### KBase: these are set in condor_config.local so that we can templatize it
+#RUN     = $(LOCAL_DIR)/run/condor
+#LOG     = $(LOCAL_DIR)/log/condor
+#LOCK    = $(LOCAL_DIR)/lock/condor
+#SPOOL   = $(LOCAL_DIR)/lib/condor/spool
+#EXECUTE = $(LOCAL_DIR)/lib/condor/execute
 BIN     = $(RELEASE_DIR)/bin
 LIB = $(RELEASE_DIR)/lib64/condor
 INCLUDE = $(RELEASE_DIR)/include/condor
