@@ -20,6 +20,8 @@ RUN cd /root && \
     pip install htcondor  && \
     rm /root/get-pip.py
 
+RUN mkdir -p /usr/local/condor/run/condor /usr/local/condor/log/condor /usr/local/condor/lock/condor /usr/local/condor/lib/condor/spool /usr/local/condor/lib/condor/execute
+
 # The BUILD_DATE value seem to bust the docker cache when the timestamp changes, move to
 # the end
 LABEL org.label-schema.build-date=$BUILD_DATE \
