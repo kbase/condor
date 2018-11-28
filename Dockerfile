@@ -5,6 +5,8 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG BRANCH=develop
 
+RUN apt-get install openjdk-8-jdk openjdk-8-jre
+
 COPY deployment/conf /etc/condor/
 COPY deployment/bin/start-condor.sh /usr/sbin/start-condor.sh
 
