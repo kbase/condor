@@ -6,7 +6,7 @@ ARG VCS_REF
 ARG BRANCH=develop
 
 
-RUN yum update; yum install wget ; wget https://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor; rpm --import RPM-GPG-KEY-HTCondor; cd /etc/yum.repos.d; wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo; yum install condor
+RUN yum update; yum install -y wget ; wget https://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor; rpm --import RPM-GPG-KEY-HTCondor; cd /etc/yum.repos.d; wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo; yum install condor
 
 
 COPY deployment/conf /etc/condor/
