@@ -18,11 +18,11 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
     rm /tmp/dockerize.tgz && \
     adduser condor_pool
 
-RUN cd /root && \
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python get-pip.py && \
-    pip install htcondor  && \
-    rm /root/get-pip.py
+# RUN cd /root && \
+#     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+#     python get-pip.py && \
+#     pip install htcondor  && \
+#     rm /root/get-pip.py
 
 RUN mkdir -p /usr/local/condor/run/condor /usr/local/condor/log/condor /usr/local/condor/lock/condor /usr/local/condor/lib/condor/spool /usr/local/condor/lib/condor/execute
 
