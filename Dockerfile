@@ -4,13 +4,6 @@ ENV container docker
 COPY deployment/conf /etc/condor/
 COPY deployment/bin/start-condor.sh /usr/sbin/start-condor.sh
 
-# Install HTCondor Python Bindings
-RUN cd /root && \
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python get-pip.py && \
-    pip install htcondor  && \
-    rm /root/get-pip.py
-
 # These ARGs values are passed in via the docker build command
 ARG BUILD_DATE
 ARG VCS_REF
