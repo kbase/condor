@@ -19,5 +19,3 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       maintainer="Steve Chan sychan@lbl.gov"
 
 ENTRYPOINT [ "/kb/deployment/bin/dockerize" ]
-
-
