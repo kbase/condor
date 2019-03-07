@@ -1,4 +1,5 @@
-FROM andypohl/htcondor:latest
+FROM centos:7
+ENV container docker
 
 # These ARGs values are passed in via the docker build command
 ARG BUILD_DATE
@@ -7,6 +8,10 @@ ARG BRANCH=develop
 
 COPY deployment/conf /etc/condor/
 COPY deployment/bin/start-condor.sh /usr/sbin/start-condor.sh
+
+# Get commonly used utilities
+RUN yum -y update && yum -y install -y wget which git deltarpm && \
+yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel 
 
 #INSTALL DOCKERIZE
 RUN wget -N https://github.com/kbase/dockerize/raw/master/dockerize-linux-amd64-v0.6.1.tar.gz && tar xvzf dockerize-linux-amd64-v0.6.1.tar.gz && cp dockerize /kb/deployment/bin && rm dockerize*
