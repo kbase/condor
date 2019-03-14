@@ -5,6 +5,16 @@ ARG BUILD_DATE
 ARG VCS_REF
 ARG BRANCH=develop
 
+
+RUN yum update; yum install -y wget 
+RUN wget https://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor; rpm --import RPM-GPG-KEY-HTCondor;
+RUN cd /etc/yum.repos.d && rm -rf *htcondor* && \
+wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && \
+wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel7.repo
+
+RUN cd /etc/yum.repos.d; RUN  cd /etc/yum.repos.d; RUN yum update; yum install -y condor-all
+
+
 COPY deployment/conf /etc/condor/
 COPY deployment/bin/start-condor.sh /usr/sbin/start-condor.sh
 
@@ -14,13 +24,14 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
     rm /tmp/dockerize.tgz && \
     adduser condor_pool
 
-RUN cd /root && \
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-    python get-pip.py && \
-    pip install htcondor  && \
-    rm /root/get-pip.py
+# RUN cd /root && \
+#     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
+#     python get-pip.py && \
+#     pip install htcondor  && \
+#     rm /root/get-pip.py
 
 RUN mkdir -p /usr/local/condor/run/condor /usr/local/condor/log/condor /usr/local/condor/lock/condor /usr/local/condor/lib/condor/spool /usr/local/condor/lib/condor/execute
+
 
 # The BUILD_DATE value seem to bust the docker cache when the timestamp changes, move to
 # the end
