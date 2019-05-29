@@ -11,6 +11,8 @@ LOG     = $(LOCAL_DIR)/log/condor
 LOCK    = $(LOCAL_DIR)/lock/condor	
 SPOOL   = $(LOCAL_DIR)/lib/condor/spool	
 EXECUTE = $(LOCAL_DIR)/lib/condor/execute	
+EVENT_LOG = $(LOCAL_DIR)/log/condor/event_log	
+
 
 CONDOR_IDS = 0.0
 
@@ -61,3 +63,5 @@ ALLOW_ADVERTISE_STARTD = condor_pool@$(UID_DOMAIN)/*,{{ default .Env.SCHEDD_NAME
 # Options for frequency of negotiation, and minimum time length of the negotiation cycle
 NEGOTIATOR_INTERVAL = {{ default .Env.NEGOTIATOR_INTERVAL "5" }}
 NEGOTIATOR_CYCLE_DELAY = {{ default .Env.NEGOTIATOR_CYCLE_DELAY "5" }}
+
+CONCURRENCY_LIMIT_DEFAULT = {{ default .Env.CONCURRENCY_LIMIT "10" }}
