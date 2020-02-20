@@ -12,7 +12,8 @@ LOCK    = $(LOCAL_DIR)/lock/condor
 SPOOL   = $(LOCAL_DIR)/lib/condor/spool	
 EXECUTE = $(LOCAL_DIR)/lib/condor/execute	
 EVENT_LOG = $(LOCAL_DIR)/log/condor/event_log	
-
+EVENT_LOG_MAX_SIZE = {{ default .Env.EVENT_LOG_MAX_SIZE "1073741824" }}
+EVENT_LOG_MAX_ROTATIONS = {{ default .Env.EVENT_LOG_MAX_ROTATIONS "100" }}
 
 CONDOR_IDS = 0.0
 
