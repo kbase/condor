@@ -1,4 +1,5 @@
-FROM andypohl/htcondor:latest
+FROM centos:7
+ENV container docker
 
 # These ARGs values are passed in via the docker build command
 ARG BUILD_DATE
@@ -6,29 +7,32 @@ ARG VCS_REF
 ARG BRANCH=develop
 
 
-RUN yum update; yum install -y wget 
-RUN wget https://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor; rpm --import RPM-GPG-KEY-HTCondor;
-RUN cd /etc/yum.repos.d && rm -rf *htcondor* && \
-wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo && \
-wget https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel7.repo
+# Get commonly used utilities
+RUN yum -y update && yum update -y systemd && yum -y install -y epel-release wget which git deltarpm gcc libcgroup libcgroup-tools stress-ng
 
-RUN cd /etc/yum.repos.d; RUN  cd /etc/yum.repos.d; RUN yum update; yum install -y condor-all
+# Install docker binaries 
+RUN yum install -y yum-utils device-mapper-persistent-data lvm2 && yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && yum install -y docker-ce
+
+# Install DOCKERIZE
+RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize/dist/dockerize-linux-amd64-v0.5.0.tar.gz && \
+      cd /usr/bin && \
+      tar xvzf /tmp/dockerize.tgz && \
+      rm /tmp/dockerize.tgz
+
+# Install HTCondor
+RUN cd /etc/yum.repos.d && \
+      wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel7.repo && \
+      wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && \
+      rpm --import RPM-GPG-KEY-HTCondor && yum -y install condor
+
+#ADD DIRS
+RUN mkdir -p /var/run/condor && mkdir -p /var/log/condor && mkdir -p /var/lock/condor && mkdir -p /var/lib/condor/execute
 
 
 COPY deployment/conf /etc/condor/
 COPY deployment/bin/start-condor.sh /usr/sbin/start-condor.sh
 
-RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize/dist/dockerize-linux-amd64-v0.5.0.tar.gz && \
-    cd /usr/bin && \
-    tar xvzf /tmp/dockerize.tgz && \
-    rm /tmp/dockerize.tgz && \
-    adduser condor_pool
-
-# RUN cd /root && \
-#     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
-#     python get-pip.py && \
-#     pip install htcondor  && \
-#     rm /root/get-pip.py
+RUN adduser condor_pool
 
 RUN mkdir -p /usr/local/condor/run/condor /usr/local/condor/log/condor /usr/local/condor/lock/condor /usr/local/condor/lib/condor/spool /usr/local/condor/lib/condor/execute
 
