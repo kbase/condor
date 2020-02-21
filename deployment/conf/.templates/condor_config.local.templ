@@ -11,9 +11,23 @@ LOG     = $(LOCAL_DIR)/log/condor
 LOCK    = $(LOCAL_DIR)/lock/condor	
 SPOOL   = $(LOCAL_DIR)/lib/condor/spool	
 EXECUTE = $(LOCAL_DIR)/lib/condor/execute	
+
+
+# Size of event log is 1GB max, with max of 250 Rotations
 EVENT_LOG = $(LOCAL_DIR)/log/condor/event_log	
-EVENT_LOG_MAX_SIZE = {{ default .Env.EVENT_LOG_MAX_SIZE "1073741824" }}
-EVENT_LOG_MAX_ROTATIONS = {{ default .Env.EVENT_LOG_MAX_ROTATIONS "100" }}
+EVENT_LOG_MAX_SIZE = {{ default .Env.EVENT_LOG_MAX_SIZE "1000000000" }}
+EVENT_LOG_MAX_ROTATIONS = {{ default .Env.EVENT_LOG_MAX_ROTATIONS "250" }}
+
+# Size of history file is 1GB max, with max of 250 Rotations
+ENABLE_HISTORY_ROTATION = {{ default .Env.ENABLE_HISTORY_ROTATION "true" }}
+MAX_HISTORY_LOG = {{ default .Env.MAX_HISTORY_LOG "1000000000" }}
+MAX_HISTORY_ROTATIONS = {{ default .Env.MAX_HISTORY_ROTATIONS "250" }}
+
+# Queue backup files
+MAX_JOB_QUEUE_LOG_ROTATIONS = {{ default .Env.MAX_JOB_QUEUE_LOG_ROTATIONS "5" }}
+
+
+
 
 CONDOR_IDS = 0.0
 
