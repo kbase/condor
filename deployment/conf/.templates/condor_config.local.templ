@@ -79,6 +79,8 @@ ALLOW_ADVERTISE_STARTD = condor_pool@$(UID_DOMAIN)/*,{{ default .Env.SCHEDD_NAME
 NEGOTIATOR_INTERVAL = {{ default .Env.NEGOTIATOR_INTERVAL "5" }}
 NEGOTIATOR_CYCLE_DELAY = {{ default .Env.NEGOTIATOR_CYCLE_DELAY "5" }}
 
+# Options for max amount of jobs and kbparallel jobs
 CONCURRENCY_LIMIT_DEFAULT = {{ default .Env.CONCURRENCY_LIMIT "10" }}
+KBP_LIMIT = {{ default .Env.KBP_LIMIT "5" }}
 
 REMOVE_SIGNIFICANT_ATTRIBUTES = HEALTH_STATUS_MESSAGE
