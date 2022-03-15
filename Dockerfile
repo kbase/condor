@@ -1,4 +1,4 @@
-FROM quay.io/kbase/centos:7
+FROM htcondor/cm:9.6-el7
 ENV container docker
 
 # These ARGs values are passed in via the docker build command
@@ -19,13 +19,7 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
       tar xvzf /tmp/dockerize.tgz && \
       rm /tmp/dockerize.tgz
 
-# Install HTCondor
-#RUN cd /etc/yum.repos.d && \
-#      wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel7.repo && \
-#      wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && \
-#      rpm --import RPM-GPG-KEY-HTCondor && yum -y install condor && condor_q -v
-
-RUN curl -fsSL https://get.htcondor.org | /bin/bash -s -- --no-dry-run && condor_q -v
+RUN condor_q -v
 
 
 #ADD DIRS
