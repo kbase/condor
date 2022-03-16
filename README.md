@@ -1,3 +1,5 @@
-# condor
-KBase specific Condor scheduler image. Based on the andypohl/htcondor image.
+# HTCondor Central Manager
+HTCondor Central Manager used at KBase
 
+* Sets POOL_PASSWORD from the env
+* Specifies a `condor_config.local` file
