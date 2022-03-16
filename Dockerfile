@@ -11,9 +11,6 @@ RUN yum -y install deltarpm
 RUN yum -y update && yum upgrade -y 
 RUN yum -y install epel-release wget which git deltarpm gcc libcgroup libcgroup-tools stress-ng
 
-# Remove vulnerabilities detected by Trivy
-RUN yum remove kernel-devel
-
 # Install DOCKERIZE
 RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize/dist/dockerize-linux-amd64-v0.5.0.tar.gz && \
       cd /usr/bin && \
