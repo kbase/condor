@@ -7,8 +7,8 @@ ARG BRANCH=develop
 
 
 # Get commonly used utilities
-RUN yum -y update && yum upgrade -y 
 RUN yum -y install deltarpm
+RUN yum -y update && yum upgrade -y 
 RUN yum -y install epel-release wget which git deltarpm gcc libcgroup libcgroup-tools stress-ng
 
 # Remove vulnerabilities detected by Trivy
