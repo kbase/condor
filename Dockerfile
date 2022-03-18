@@ -1,5 +1,4 @@
-FROM quay.io/kbase/centos:7
-ENV container docker
+FROM htcondor/cm:9.6-el7
 
 # These ARGs values are passed in via the docker build command
 ARG BUILD_DATE
@@ -8,10 +7,9 @@ ARG BRANCH=develop
 
 
 # Get commonly used utilities
-RUN yum -y update && yum update -y systemd && yum -y install -y epel-release wget which git deltarpm gcc libcgroup libcgroup-tools stress-ng
-
-# Install docker binaries 
-RUN yum install -y yum-utils device-mapper-persistent-data lvm2 && yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo && yum install -y docker-ce
+RUN yum -y install deltarpm
+RUN yum -y update && yum upgrade -y 
+RUN yum -y install epel-release wget which git deltarpm gcc libcgroup libcgroup-tools stress-ng
 
 # Install DOCKERIZE
 RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize/dist/dockerize-linux-amd64-v0.5.0.tar.gz && \
@@ -19,21 +17,12 @@ RUN curl -o /tmp/dockerize.tgz https://raw.githubusercontent.com/kbase/dockerize
       tar xvzf /tmp/dockerize.tgz && \
       rm /tmp/dockerize.tgz
 
-# Install HTCondor
-RUN cd /etc/yum.repos.d && \
-      wget http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel7.repo && \
-      wget http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && \
-      rpm --import RPM-GPG-KEY-HTCondor && yum -y install condor
-
 #ADD DIRS
 RUN mkdir -p /var/run/condor && mkdir -p /var/log/condor && mkdir -p /var/lock/condor && mkdir -p /var/lib/condor/execute
 
-
 COPY deployment/conf /etc/condor/
 COPY deployment/bin/start-condor.sh /usr/sbin/start-condor.sh
-
 RUN adduser condor_pool
-
 RUN mkdir -p /usr/local/condor/run/condor /usr/local/condor/log/condor /usr/local/condor/lock/condor /usr/local/condor/lib/condor/spool /usr/local/condor/lib/condor/execute
 
 
