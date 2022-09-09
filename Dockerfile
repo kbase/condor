@@ -1,4 +1,4 @@
-FROM htcondor/cm:9.6-el7
+FROM htcondor/cm:9.11-el7
 
 # These ARGs values are passed in via the docker build command
 ARG BUILD_DATE
