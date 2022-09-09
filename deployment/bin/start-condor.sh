@@ -10,4 +10,5 @@ if [ "$CONDOR_CONFIG_FILEPATH" ] ; then
     cp $CONDOR_CONFIG_FILE /etc/condor/condor_config.local
 fi
 
-$(condor_config_val MASTER) -f -t
+
+$(condor_config_val MASTER) -f -t |& tee -a /usr/local/condor/log/SCHEDD_LOG
