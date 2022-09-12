@@ -7,7 +7,7 @@ if [ "$POOL_PASSWORD" ] ; then
 fi
 
 if [ "$CONDOR_CONFIG_FILEPATH" ] ; then
-    cp "$CONDOR_CONFIG_FILE" /etc/condor/condor_config.local
+    cp "$CONDOR_CONFIG_FILEPATH" /etc/condor/condor_config.local
 fi
 
 $(condor_config_val MASTER) -f -t
