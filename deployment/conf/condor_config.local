@@ -1,0 +1,32 @@
+# Size of event log is 1GB max, with max of 250 Rotations
+EVENT_LOG = $(LOCAL_DIR)/log/condor/event_log	
+EVENT_LOG_MAX_SIZE = 1000000000
+EVENT_LOG_MAX_ROTATIONS = 250
+
+# Size of history file is 1GB max, with max of 250 Rotations
+ENABLE_HISTORY_ROTATION = true
+MAX_HISTORY_LOG = 1000000000
+MAX_HISTORY_ROTATIONS = 250
+
+# Queue backup files
+MAX_JOB_QUEUE_LOG_ROTATIONS = 5
+
+# If the environment variable USE_TCP is set to true, the template will enable
+# this group of directives that convert communications to TCP
+# per https://lists.cs.wisc.edu/archive/htcondor-users/2011-August/msg00085.shtml
+
+UPDATE_COLLECTOR_WITH_TCP = True
+UPDATE_VIEW_COLLECTOR_WITH_TCP = True
+WANT_UDP_COMMAND_SOCKET = False
+COLLECTOR_MAX_FILE_DESCRIPTORS = 3000
+
+# CGROUPS
+BASE_CGROUP = htcondor
+CGROUP_MEMORY_LIMIT_POLICY = soft
+
+# Options for frequency of negotiation, and minimum time length of the negotiation cycle
+NEGOTIATOR_INTERVAL = 5
+NEGOTIATOR_CYCLE_DELAY = 5
+CONCURRENCY_LIMIT_DEFAULT = 10
+REMOVE_SIGNIFICANT_ATTRIBUTES = HEALTH_STATUS_MESSAGE
+DAEMON_LIST = MASTER SCHEDD COLLECTOR NEGOTIATOR
