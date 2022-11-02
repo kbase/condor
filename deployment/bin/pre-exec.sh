@@ -11,13 +11,11 @@ fi
 
 # JWT Token created by condor_token_create -identity condor-central-manager
 if [ "$JWT_TOKEN "] ; then
+    mkdir /
     echo "$JWT_TOKEN" >  /etc/condor/tokens-orig.d/jwt_from_env
 fi
 
+# If we want to override the extra settings config file with another config file mounted the container
 if [ "$CONDOR_CONFIG_FILEPATH" ] ; then
     cp "$CONDOR_CONFIG_FILEPATH" /etc/condor/condor_config.local
-fi
-
-if [ "$SCHEDD_HOST" ] ; then
-    echo "DAEMON_LIST = MASTER SCHEDD COLLECTOR NEGOTIATOR" > /etc/condor/config.d/daemon_list.conf
 fi
