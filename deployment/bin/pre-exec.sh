@@ -9,8 +9,8 @@ if [ "$POOL_PASSWORD" ] ; then
     /usr/sbin/condor_store_cred -p "$POOL_PASSWORD" -f /etc/condor/passwords-orig.d/pool_password_from_env
 fi
 
-# JWT Token created by `condor_token_create -identity condor-central-manager`
-if [ "$JWT_TOKEN"] ; then
+# JWT Token created by condor_token_create -identity condor-central-manager
+if [ "$JWT_TOKEN "] ; then
     echo "$JWT_TOKEN" >  /etc/condor/tokens-orig.d/jwt_from_env
 fi
 
