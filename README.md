@@ -1,4 +1,4 @@
-# condor
+# Condor Central Manager and Schedd
 
 KBase specific condor scheduler image.
 Based on the htcondor/cm:9.X images
