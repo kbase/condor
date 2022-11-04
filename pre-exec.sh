@@ -10,8 +10,8 @@ if [ "$POOL_PASSWORD" ] ; then
 fi
 
 # JWT Token created by condor_token_create -identity condor-central-manager
-if [ "$JWT_TOKEN "] ; then
-    mkdir /
+if [ "$JWT_TOKEN " ] ; then
+    mkdir /etc/condor/tokens-orig.d/
     echo "$JWT_TOKEN" >  /etc/condor/tokens-orig.d/jwt_from_env
 fi
 
