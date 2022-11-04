@@ -7,15 +7,18 @@
 if [ "$POOL_PASSWORD" ] ; then
     mkdir /etc/condor/passwords-orig.d/
     /usr/sbin/condor_store_cred -p "$POOL_PASSWORD" -f /etc/condor/passwords-orig.d/pool_password_from_env
+    /update-secrets
 fi
 
 # JWT Token created by condor_token_create -identity condor-central-manager
 if [ "$JWT_TOKEN " ] ; then
     mkdir /etc/condor/tokens-orig.d/
     echo "$JWT_TOKEN" >  /etc/condor/tokens-orig.d/jwt_from_env
+    /update-secrets
 fi
 
 # Overwrite the default config file that comes with this image
 if [ "$OVERWRITE_CONFIG_FILEPATH" ] ; then
     cp "$CONDOR_CONFIG_FILEPATH" /etc/condor/kbase_config.conf
+    /update-config
 fi
