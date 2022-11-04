@@ -15,7 +15,7 @@ if [ "$JWT_TOKEN "] ; then
     echo "$JWT_TOKEN" >  /etc/condor/tokens-orig.d/jwt_from_env
 fi
 
-# If we want to override the extra settings config file with another config file mounted the container
-if [ "$CONDOR_CONFIG_FILEPATH" ] ; then
-    cp "$CONDOR_CONFIG_FILEPATH" /etc/condor/condor_config.local
+# Overwrite the default config file that comes with this image
+if [ "$OVERWRITE_CONFIG_FILEPATH" ] ; then
+    cp "$CONDOR_CONFIG_FILEPATH" /etc/condor/kbase_config.conf
 fi
