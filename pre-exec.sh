@@ -14,13 +14,10 @@ if [ "$CONDOR_JWT_TOKEN" ] ; then
     chmod 600 /etc/condor/tokens.d/JWT
 fi
 
-# Hacks to add in schedd and collector from ENV
-if [ "$SCHEDD_HOST" ] ; then
-    echo "SCHEDD_HOST = $SCHEDD_HOST" >> /etc/condor/condor_config.local
-fi
-
+# Hacks to enable worker for testing using this same image
 if [ "$COLLECTOR_HOST" ] ; then
     echo "COLLECTOR_HOST = $COLLECTOR_HOST" >> /etc/condor/condor_config.local
+    echo "DAEMON_LIST = MASTER STARTD" >> /etc/condor/condor_config.local
 fi
 
 # Overwrite the default config file that comes with this image
