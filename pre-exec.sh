@@ -18,6 +18,13 @@ fi
 if [ "$COLLECTOR_HOST" ] ; then
     echo "COLLECTOR_HOST = $COLLECTOR_HOST" >> /etc/condor/condor_config.local
     echo "DAEMON_LIST = MASTER STARTD" >> /etc/condor/condor_config.local
+    /update-config
+fi
+
+# Allow StartD at kbase and nersc
+if [ "$UID_DOMAIN" ] ; then
+    echo "ALLOW_ADVERTISE_STARTD = \$(ALLOW_ADVERTISE_STARTD) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local
+    /update-config
 fi
 
 # Overwrite the default config file that comes with this image
