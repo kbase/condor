@@ -16,6 +16,6 @@ fi
 
 # Overwrite the default config file that comes with this image
 if [ "$OVERWRITE_CONFIG_FILEPATH" ] ; then
-    cp "$CONDOR_CONFIG_FILEPATH" /etc/condor/kbase_config.conf
+    cp "$CONDOR_CONFIG_FILEPATH" /etc/condor/kbase.conf
     /update-config
 fi
