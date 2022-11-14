@@ -4,17 +4,14 @@
 
 # If there is an environment variable "POOL_PASSWORD" write it out to the pool
 # condor pool password
-if [ "$POOL_PASSWORD" ] ; then
-    mkdir /etc/condor/passwords-orig.d/
-    /usr/sbin/condor_store_cred -p "$POOL_PASSWORD" -f /etc/condor/passwords-orig.d/pool_password_from_env
-    /update-secrets
+if [ "$CONDOR_SIGNING_KEY" ] ; then
+    echo "$CONDOR_SIGNING_KEY" > /etc/condor/passwords.d/POOL
+    chmod 600 /etc/condor/passwords.d/POOL
 fi
 
-# JWT Token created by condor_token_create -identity condor-central-manager
-if [ "$JWT_TOKEN " ] ; then
-    mkdir /etc/condor/tokens-orig.d/
-    echo "$JWT_TOKEN" >  /etc/condor/tokens-orig.d/jwt_from_env
-    /update-secrets
+if [ "$CONDOR_JWT_TOKEN" ] ; then
+    echo "$CONDOR_JWT_TOKEN" > /etc/condor/tokens.d/JWT
+    chmod 600 /etc/condor/tokens.d/JWT
 fi
 
 # Overwrite the default config file that comes with this image
