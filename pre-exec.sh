@@ -13,10 +13,14 @@ fi
 ############################################################################### 
 # Give specific JWT tokens permissions for Running Workers, Schedd, And Jobs
 ############################################################################### 
-echo "ALLOW_ADVERTISE_STARTD = \$(ALLOW_ADVERTISE_STARTD) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local
-echo "ALLOW_WRITE = \$(ALLOW_WRITE) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local  
-echo "$CONDOR_JWT_TOKEN" > /etc/condor/tokens.d/JWT
-chmod 600 /etc/condor/tokens.d/JWT
+if [ "$UID_DOMAIN" ] ; then
+    echo "ALLOW_ADVERTISE_STARTD = \$(ALLOW_ADVERTISE_STARTD) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local
+    echo "ALLOW_WRITE = \$(ALLOW_WRITE) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local  
+fi
+if [ "$CONDOR_JWT_TOKEN" ] ; then
+    echo "$CONDOR_JWT_TOKEN" > /etc/condor/tokens.d/JWT
+    chmod 600 /etc/condor/tokens.d/JWT
+fi
 /update-config
 
 ############################################################################### 
