@@ -24,6 +24,7 @@ fi
 # Allow StartD at kbase and nersc
 if [ "$UID_DOMAIN" ] ; then
     echo "ALLOW_ADVERTISE_STARTD = \$(ALLOW_ADVERTISE_STARTD) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local
+    echo "ALLOW_WRITE = $(authuser)@$(FULL_HOSTNAME) $(authuser)@$(IP_ADDRESS) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local  
     /update-config
 fi
 
