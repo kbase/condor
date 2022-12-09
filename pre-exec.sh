@@ -11,11 +11,8 @@ if [ "$CONDOR_SIGNING_KEY" ] ; then
 fi
 
 ############################################################################### 
-# Allow Running Workers, Schedd, And Jobs
+# Give specific JWT tokens permissions for Running Workers, Schedd, And Jobs
 ############################################################################### 
-: "${UID_DOMAIN:?Variable not set or empty}"
-: "${CONDOR_JWT_TOKEN:?Variable not set or empty}"
-
 echo "ALLOW_ADVERTISE_STARTD = \$(ALLOW_ADVERTISE_STARTD) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local
 echo "ALLOW_WRITE = \$(ALLOW_WRITE) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local  
 /update-config
