@@ -24,8 +24,13 @@ if [ "$CONDOR_JWT_TOKEN" ] ; then
 fi
 
 ####################### HOST PATHS ############################################
-#TODO Possibly do these host paths based on condor variables
-chmod 700 /var/log/condor/ /var/lib/condor/
+#Ensure proper permissions for directories
+
+CONDOR_DIRS=$(condor_config_val LOCAL_DIR SPOOL LOG LOCAL_DIR LOCK CONDOR_SHARED | xargs)
+mkdir -p $CONDOR_DIRS
+chmod 700 $CONDOR_DIRS
+
+
 /update-config
 ####################### HOST PATHS ############################################
 
