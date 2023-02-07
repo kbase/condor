@@ -26,10 +26,9 @@ fi
 ####################### HOST PATHS ############################################
 
 
-CONDOR_DIRS=$(condor_config_val LOCAL_DIR LOG SPOOL CONDOR_SHARED | xargs)
-mkdir -p $CONDOR_DIRS
-chmod 770 $CONDOR_DIRS
-chown root:condor $CONDOR_DIRS
+$DIRS_TO_CREATE=$(condor_config_val DIRS_TO_CREATE)
+mkdir -p $DIRS_TO_CREATE
+chmod 700 $DIRS_TO_CREATE && chown root:root $CONDOR_DIRS
 
 /update-config
 ####################### HOST PATHS ############################################
