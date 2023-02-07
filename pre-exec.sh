@@ -28,7 +28,7 @@ fi
 
 DIRS_TO_CREATE=$(condor_config_val DIRS_TO_CREATE)
 mkdir -p $DIRS_TO_CREATE
-chmod 700 $DIRS_TO_CREATE && chown root:root $DIRS_TO_CREATE
+chmod 770 $DIRS_TO_CREATE && chown root:condor $DIRS_TO_CREATE
 
 /update-config
 ####################### HOST PATHS ############################################
