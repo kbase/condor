@@ -22,7 +22,14 @@ if [ "$CONDOR_JWT_TOKEN" ] ; then
      echo "$CONDOR_JWT_TOKEN" > /etc/condor/tokens.d/JWT
      chmod 600 /etc/condor/tokens.d/JWT
 fi
+
+####################### HOST PATHS ############################################
+#TODO Possibly do these host paths based on condor variables
+chmod 700 /var/log/condor/ /var/lib/condor/
 /update-config
+####################### HOST PATHS ############################################
+
+
 
 ############################################################################### 
 # Overwrite the default config file that comes with this image
@@ -31,10 +38,6 @@ if [ "$OVERWRITE_CONFIG_FILEPATH" ] ; then
     cp "$CONDOR_CONFIG_FILEPATH" /etc/condor/condor_config.local
     /update-config
 fi
-
-#TODO Possibly do these host paths based on condor variables
-chown condor:condor /var/log/condor/ /var/lib/condor/
-chmod 700 /var/log/condor/ /var/lib/condor/
 
 
 ############################################################################### 
