@@ -24,12 +24,9 @@ if [ "$CONDOR_JWT_TOKEN" ] ; then
 fi
 
 ####################### HOST PATHS ############################################
-
-
 DIRS_TO_CREATE=$(condor_config_val DIRS_TO_CREATE)
 mkdir -p $DIRS_TO_CREATE
 chmod 770 $DIRS_TO_CREATE && chown root:condor $DIRS_TO_CREATE
-
 /update-config
 ####################### HOST PATHS ############################################
 
