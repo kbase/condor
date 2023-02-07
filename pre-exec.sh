@@ -32,6 +32,11 @@ if [ "$OVERWRITE_CONFIG_FILEPATH" ] ; then
     /update-config
 fi
 
+#TODO Possibly do these paths based on condor variables
+chown condor:condor /var/log/condor/ /var/lib/condor/
+chmod 700 /var/log/condor/ /var/lib/condor/
+
+
 ############################################################################### 
 # FOR TESTING PURPOSES ONLY
 # SET COLLECTOR_HOST TO TURN THIS CONTAINER INTO A WORKER
