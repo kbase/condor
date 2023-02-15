@@ -15,7 +15,7 @@ fi
 ###############################################################################
 if [ "$UID_DOMAIN" ] ; then
     echo "ALLOW_ADVERTISE_STARTD = \$(ALLOW_ADVERTISE_STARTD) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local
-    echo "ALLOW_WRITE = \$(ALLOW_WRITE) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local
+    echo "ALLOW_WRITE = \$(ALLOW_WRITE) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN} condor_pool@${UID_DOMAIN}" >> /etc/condor/condor_config.local
 fi
 
 if [ "$CONDOR_JWT_TOKEN" ] ; then
@@ -27,6 +27,8 @@ fi
 DIRS_TO_CREATE=$(condor_config_val DIRS_TO_CREATE)
 mkdir -p $DIRS_TO_CREATE
 chmod 770 $DIRS_TO_CREATE && chown root:condor $DIRS_TO_CREATE
+chmod 770 $(condor_config_val CONDOR_SHARED)
+chmod 770 $(condor_config_val SHARED_PORT_DAEMON_AD_FILE)
 /update-config
 ####################### HOST PATHS ############################################
 
