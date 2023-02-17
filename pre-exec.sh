@@ -6,7 +6,10 @@
 # Once you have the key, you should provide it so it stays the same forever.
 ###############################################################################
 if [ "$CONDOR_SIGNING_KEY" ] ; then
+    echo "About to set CONDOR_SIGNING_KEY"
+    set +x
     echo "$CONDOR_SIGNING_KEY" > /etc/condor/passwords.d/POOL
+    set -x
     chmod 600 /etc/condor/passwords.d/POOL
 fi
 
@@ -19,8 +22,12 @@ if [ "$UID_DOMAIN" ] ; then
 fi
 
 if [ "$CONDOR_JWT_TOKEN" ] ; then
+     echo "About to set CONDOR_JWT_TOKEN"
+     set +x
      echo "$CONDOR_JWT_TOKEN" > /etc/condor/tokens.d/JWT
+     set -x
      chmod 600 /etc/condor/tokens.d/JWT
+     
 fi
 
 ####################### HOST PATHS ############################################
