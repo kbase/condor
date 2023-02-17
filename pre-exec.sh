@@ -5,30 +5,31 @@
 # Condor Signing Key (Required to create future tokens) is automatically created upon starting this container
 # Once you have the key, you should provide it so it stays the same forever.
 ###############################################################################
+set +x
 if [ "$CONDOR_SIGNING_KEY" ] ; then
     echo "About to set CONDOR_SIGNING_KEY"
-    set +x
-    echo "$CONDOR_SIGNING_KEY" > /etc/condor/passwords.d/POOL
-    set -x
+     echo "$CONDOR_SIGNING_KEY" > /etc/condor/passwords.d/POOL
     chmod 600 /etc/condor/passwords.d/POOL
 fi
+set -x
+    
 
 ###############################################################################
 # Give specific JWT tokens permissions for Running Workers, Schedd, And Jobs
 ###############################################################################
+
 if [ "$UID_DOMAIN" ] ; then
     echo "ALLOW_ADVERTISE_STARTD = \$(ALLOW_ADVERTISE_STARTD) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN}" >> /etc/condor/condor_config.local
     echo "ALLOW_WRITE = \$(ALLOW_WRITE) kbase_workers@${UID_DOMAIN} nersc_workers@${UID_DOMAIN} condor_pool@${UID_DOMAIN}" >> /etc/condor/condor_config.local
 fi
-
+set +x
 if [ "$CONDOR_JWT_TOKEN" ] ; then
      echo "About to set CONDOR_JWT_TOKEN"
-     set +x
      echo "$CONDOR_JWT_TOKEN" > /etc/condor/tokens.d/JWT
-     set -x
-     chmod 600 /etc/condor/tokens.d/JWT
-     
+     chmod 600 /etc/condor/tokens.d/JWT    
 fi
+set -x
+
 
 ####################### HOST PATHS ############################################
 DIRS_TO_CREATE=$(condor_config_val DIRS_TO_CREATE)
